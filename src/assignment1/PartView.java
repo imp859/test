@@ -16,6 +16,7 @@ public class PartView extends JFrame {
 	private JLabel partNum;
 	private JLabel vendor;
 	private JLabel quantity;
+	private JLabel unitOfQ;	
 
 	private JPanel prtView;
 
@@ -23,7 +24,8 @@ public class PartView extends JFrame {
 	private JTextField partNumText;
 	private JTextField vendorText;
 	private JTextField quantityText;
-	
+	private JTextField unitOfQText;	
+
 	private JButton save;
 	private JButton delete;
 	
@@ -54,6 +56,11 @@ public class PartView extends JFrame {
 		quantityText = new JTextField("Enter Quantity: ");
 		prtView.add(quantityText);
 		
+		unitofQ = new JLabel("Unit of Quantity: ");
+		prtView.add(unitofQ);
+		unitOfQText = new JTextField("Enter Unit of Quantity");
+		prtView.add(unitOfQText);
+
 		save = new JButton("SAVE");
 		prtView.add(save);
 		delete = new JButton("DELETE");
@@ -88,6 +95,11 @@ public class PartView extends JFrame {
 		quantityText = new JTextField(qString);
 		prtView.add(quantityText);
 		
+		unitofQ = new JLabel("Unit of Quantity: ");
+		prtView.add(unitofQ);
+		unitOfQText = new JTextField("Enter Unit of Quantity");
+		prtView.add(unitOfQText);
+
 		save = new JButton("SAVE");
 		prtView.add(save);
 		delete = new JButton("DELETE");
@@ -99,6 +111,7 @@ public class PartView extends JFrame {
 		partNameText.addActionListener(c);
 		vendorText.addActionListener(c);
 		quantityText.addActionListener(c); 
+		unitOfQText.addActionListener(c);
 		save.addActionListener(c);
 		delete.addActionListener(c);
 	}
@@ -121,5 +134,9 @@ public class PartView extends JFrame {
 	
 	public JTextField getQuantity(){
 		return this.quantityText;
+	}
+
+	public JTextField getUnitofQuantity(){
+		return this.unitOfQText;
 	}
 }

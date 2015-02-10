@@ -26,7 +26,8 @@ public class InventoryView extends JFrame {
 		addButton = new JButton(ADD);
 		editButton = new JButton(EDIT);
 		dtm = new DefaultTableModel(new Object[] { "Part #", "Part Name",
-				"Vendor", "Quantity", "ID Field" }, 0);
+				"Vendor", "Quantity", "ID Field", "Unit of Quantity" }, 0);
+
 
 		mainPartList = new JTable(dtm);
 		mainPartList.getTableHeader().setReorderingAllowed(false);
@@ -48,17 +49,19 @@ public class InventoryView extends JFrame {
 	}
 
 	public void addAnotherRow(String prtNum, String prtName, String Ven,
-			int quant, int id) {
+			int quant, int id, String unitOfQ) {
 		//DefaultTableModel tempDtm = (DefaultTableModel) mainPartList.getModel();
-		dtm.addRow(new Object[] { prtNum, prtName, Ven, quant, id });
+		dtm.addRow(new Object[] { prtNum, prtName, Ven, quant, id, unitOfQ });
 	}
 
-	public void editRow(String prtNum, String prtName, String Ven, int quant, id) {
+
+	public void editRow(String prtNum, String prtName, String Ven, int quant, int id, String unitOfQ) {
 		mainPartList.setValueAt(prtNum, getTable(), 0);
 		mainPartList.setValueAt(prtName, getTable(), 1);
 		mainPartList.setValueAt(Ven, getTable(), 2);
 		mainPartList.setValueAt(quant, getTable(), 3);
 		mainPartList.setValue(id, getTable(), 4);
+		mainPartList.setValueAt(unitOfQ, getTable(), 5);
 	}
 
 	public void deleteRow(int row) {
@@ -110,6 +113,10 @@ public class InventoryView extends JFrame {
 	public JButton getPartViewSave() {
 		return otherView.getSave();
 	}
+
+	public JTextField getPartViewUnitofQuantity(){
+        	return otherView.getUnitofQuantity();
+        }
 
 	public void invalidPartNum() {
 		JOptionPane.showMessageDialog(otherView.getPartNum(),

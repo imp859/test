@@ -7,6 +7,7 @@ public class InventoryModel {
 	private ArrayList<String> partName;
 	private ArrayList<String> vendor;
 	private ArrayList<Integer> quantity;
+	private ArrayList<String> unitOfQ;
 	private int count;
 	private int idField;
 
@@ -15,6 +16,7 @@ public class InventoryModel {
 		partName = new ArrayList<>();
 		vendor = new ArrayList<>();
 		quantity = new ArrayList<>();
+		unitOfQ = new ArrayList<>();
 		count = 0;
 		idField = 0;
 	}
@@ -139,6 +141,42 @@ public class InventoryModel {
 	public int getQuantity(int n) {
 		return this.quantity.get(n);
 	}
+
+	
+	public int setUnitOfQuantity(String s) {
+		int flag = 0;
+		if (s == null) {
+			this.unitOfQ.add("Unknown");
+			return flag = 1;
+		} else if (s.equalsIgnoreCase("unknown")) {
+			return flag;
+		} else {
+			this.unitOfQ.add(s);
+			return flag = 1;
+		}
+	}
+
+	public int setUnitOfQuantity(String s, int row) {
+		int flag = 0;
+		if (s == null) {
+			this.unitOfQ.set(row, "Unknown");
+			return flag = 1;
+		} else if (s.equalsIgnoreCase("unknown")) {
+			return flag;
+		} else {
+			this.unitOfQ.set(row, s);
+			return flag = 1;
+		}
+	}
+
+	public String getUnitOfQuantity() {
+		return this.unitOfQ.get(count);
+	}
+
+	public String getUnitOfQuantity(int n) {
+		return this.unitOfQ.get(n);
+	}
+
 
 	public int getCount() {
 		return count;
