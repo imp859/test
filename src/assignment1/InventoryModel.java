@@ -8,6 +8,7 @@ public class InventoryModel {
 	private ArrayList<String> vendor;
 	private ArrayList<Integer> quantity;
 	private int count;
+	private int idField;
 
 	public InventoryModel() {
 		partNumber = new ArrayList<>();
@@ -15,6 +16,7 @@ public class InventoryModel {
 		vendor = new ArrayList<>();
 		quantity = new ArrayList<>();
 		count = 0;
+		idField = 0;
 	}
 	
 	public int setPartNum(String s) {
@@ -144,6 +146,14 @@ public class InventoryModel {
 
 	public void incrementCount() {
 		count++;
+	}
+
+	public void incrementIDField() {
+		idField++;
+	}
+
+	public int getIDField() {
+		return idField;
 	}
 
 	public void deleteElements(int row) {
