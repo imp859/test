@@ -8,7 +8,7 @@ public class InventoryController implements ActionListener {
 	private InventoryModel inMod;
 
 	private int editFlag;
-	private int numFlag, nameFlag, vendorFlag, quantityFlag;
+	private int numFlag, nameFlag, vendorFlag, quantityFlag, unitOfQFlag;
 
 	public InventoryController(InventoryView otherView,
 			InventoryModel otherModel) {
@@ -19,6 +19,7 @@ public class InventoryController implements ActionListener {
 		vendorFlag = 0;
 		quantityFlag = 0;
 		editFlag = 0;
+		unitOfQFlag = 0;
 	}
 
 	@Override
@@ -31,6 +32,7 @@ public class InventoryController implements ActionListener {
 			quantityFlag = 0;
 			nameFlag = 0;
 			numFlag = 0;
+			unitOfQFlag = 0;
 		} else if (e.getActionCommand().equals("Edit Inventory")) {
 			int row = inOpt.getTable();
 			if (row >= 0) {
@@ -118,6 +120,35 @@ public class InventoryController implements ActionListener {
 					System.out.println(inMod.getQuantity(inOpt.getTable()));
 				}
 			}
+		} else if (e.getActionCommand().equals(
+				inOpt.getPartViewUnitofQuantity().getText())) {
+			if (editFlag == 0) {
+				if (e.getActionCommand() == null
+						&& e.getActionCommand().isEmpty()) {
+					s = e.getActionCommand();
+					unitOfQFlag = inMod.setUnitOfQuantity(s);
+					unitOfQFlag = 0;
+				} else {
+					s = e.getActionCommand();
+					unitOfQFlag = inMod.setUnitOfQuantity(s);
+					if (unitOfQFlag == 0) {
+						inOpt.invalidVendor();
+					}
+				}
+			} else {
+				if (e.getActionCommand() == null
+						&& e.getActionCommand().isEmpty()) {
+					s = e.getActionCommand();
+					unitOfQFlag = inMod.setUnitOfQuantity(s, inOpt.getTable());
+					vendorFlag = 0;
+				} else {
+					s = e.getActionCommand();
+					unitOfQFlag = inMod.setUnitOfQuantity(s, inOpt.getTable());
+					if (unitOfQFlag == 0) {
+						inOpt.invalidVendor();
+					}
+				}
+			}
 		} else if (e.getActionCommand().equals("SAVE")) {
 			if (editFlag == 0) {
 				if (numFlag == 0 || nameFlag == 0 || quantityFlag == 0) {
@@ -125,17 +156,23 @@ public class InventoryController implements ActionListener {
 				} else {
 					if (vendorFlag == 0) {
 						inMod.setVendor("N/A");
+						if(unitOfQFlag ==0){
+							inMod.setUnitOfQuantity(null);
+						}
 						inOpt.addAnotherRow(inMod.getPartNum(),
 								inMod.getPartName(), inMod.getVendor(),
-								inMod.getQuantity());
+								inMod.getQuantity(), inMod.getUnitOfQuantity());
 						inMod.incrementCount();
 					} else {
+						if(unitOfQFlag == 0){
+							inMod.setUnitOfQuantity(null);
+						}
 						inOpt.addAnotherRow(inMod.getPartNum(),
 								inMod.getPartName(), inMod.getVendor(),
-								inMod.getQuantity());
+								inMod.getQuantity(), inMod.getUnitOfQuantity());
 						inMod.incrementCount();
 					}
-					numFlag = nameFlag = quantityFlag = vendorFlag = editFlag = 0;
+					numFlag = nameFlag = quantityFlag = vendorFlag = editFlag = unitOfQFlag = 0;
 				}
 			} else if (editFlag == 1) {
 				if (numFlag == 0 || nameFlag == 0 || quantityFlag == 0) {
@@ -144,10 +181,13 @@ public class InventoryController implements ActionListener {
 					if (vendorFlag == 0) {
 						inMod.setVendor("N/A", inOpt.getTable());
 					}
+					if(unitOfQFlag == 0){
+						inMod.setUnitOfQuantity(null, inOpt.getTable());
+					}
 					inOpt.editRow(inMod.getPartNum(inOpt.getTable()),
 							inMod.getPartName(inOpt.getTable()),
 							inMod.getVendor(inOpt.getTable()),
-							inMod.getQuantity(inOpt.getTable()));
+							inMod.getQuantity(inOpt.getTable()), inMod.getUnitOfQuantity(inOpt.getTable()));
 				}
 			}
 		} else if (e.getActionCommand().equals("DELETE")) {
