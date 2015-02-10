@@ -125,14 +125,16 @@ public class InventoryController implements ActionListener {
 				} else {
 					if (vendorFlag == 0) {
 						inMod.setVendor("N/A");
+						inMod.incrementIDField();
 						inOpt.addAnotherRow(inMod.getPartNum(),
 								inMod.getPartName(), inMod.getVendor(),
-								inMod.getQuantity());
+								inMod.getQuantity(), inMod.getIDField());
 						inMod.incrementCount();
 					} else {
+						inMod.incrementIDField();
 						inOpt.addAnotherRow(inMod.getPartNum(),
 								inMod.getPartName(), inMod.getVendor(),
-								inMod.getQuantity());
+								inMod.getQuantity(), inMod.getIDField());
 						inMod.incrementCount();
 					}
 					numFlag = nameFlag = quantityFlag = vendorFlag = editFlag = 0;
@@ -144,10 +146,11 @@ public class InventoryController implements ActionListener {
 					if (vendorFlag == 0) {
 						inMod.setVendor("N/A", inOpt.getTable());
 					}
+					inMod.incremenetIDField();
 					inOpt.editRow(inMod.getPartNum(inOpt.getTable()),
 							inMod.getPartName(inOpt.getTable()),
 							inMod.getVendor(inOpt.getTable()),
-							inMod.getQuantity(inOpt.getTable()));
+							inMod.getQuantity(inOpt.getTable()), inMod.getIDField());
 				}
 			}
 		} else if (e.getActionCommand().equals("DELETE")) {
